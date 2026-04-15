@@ -31,6 +31,25 @@ The practice of protecting a computer network from unauthorized access, misuse, 
 ### SOC Relevance
 A SOC analyst's job is to monitor, detect, and respond to threats against all three of these goals. Everything in this course feeds into that workflow.
 
+Source & Destination Port — identify which application is sending and receiving (e.g. port 443 = HTTPS, port 22 = SSH). SOC use: spotting unusual ports used for data exfiltration or C2 traffic.
+
+Sequence Number — a number assigned to each byte of data so the receiver can reassemble packets in the correct order. Also used to detect missing or duplicate packets.
+
+Acknowledgment Number — tells the sender which byte the receiver expects next, confirming what was successfully received. This is how TCP guarantees delivery.
+
+Data Offset — tells the receiver where the actual data starts, since the header can vary in size due to options.
+
+Reserved — unused bits, set to zero. Reserved for future use by the protocol.
+
+Flags — 9 control bits that manage the state of the connection. The key ones are SYN (start connection), ACK (acknowledge), FIN (close connection), RST (reset/abort), and PSH (send data immediately). SOC use: a flood of SYN packets with no ACK = SYN flood attack. Unexpected RST packets can indicate a port scan.
+
+Window Size — how many bytes the receiver can accept before needing an acknowledgment. Controls the flow so neither side gets overwhelmed.
+
+Checksum — verifies the header and data haven't been corrupted in transit. If it doesn't match, the packet is dropped.
+
+Urgent Pointer — only active when the URG flag is set, points to urgent data that should be processed immediately. Rarely used in normal traffic.
+
+Options — optional extra settings like maximum segment size or timestamps. Padded to keep the header aligned to 32-bit boundaries.
 ---
 
 ## 2. Network Layer Protocols
