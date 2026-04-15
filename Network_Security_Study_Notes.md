@@ -58,6 +58,7 @@ Client  ←  SYN-ACK    ←  Server
 Client  →  ACK        →  Server
 (Connection established)
 ```
+This is a picture of the 3 way handshake being shown in real time: ![Screenshot](Network_screenshots/Screenshot-2026-04-15-054315.png)
 
 - **Reliable** — guarantees delivery, retransmits lost packets
 - **Flow control** — prevents sender from overwhelming receiver
