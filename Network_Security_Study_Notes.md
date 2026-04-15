@@ -63,6 +63,8 @@ Client  →  ACK        →  Server
 - **Flow control** — prevents sender from overwhelming receiver
 - **SOC Relevance** — SYN flood attacks abuse the handshake by sending thousands of SYNs without completing the connection, exhausting server resources. Incomplete handshakes in packet captures = red flag.
 
+  ![Screenshot](Network_screenshots/Screenshot-2026-04-15-052030.png)
+
 Source & Destination Port — identify which application is sending and receiving (e.g. port 443 = HTTPS, port 22 = SSH). SOC use: spotting unusual ports used for data exfiltration or C2 traffic.
 
 Sequence Number — a number assigned to each byte of data so the receiver can reassemble packets in the correct order. Also used to detect missing or duplicate packets.
