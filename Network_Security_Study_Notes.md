@@ -84,6 +84,9 @@ Checksum — verifies the header and data haven't been corrupted in transit. If 
 Urgent Pointer — only active when the URG flag is set, points to urgent data that should be processed immediately. Rarely used in normal traffic.
 
 Options — optional extra settings like maximum segment size or timestamps. Padded to keep the header aligned to 32-bit boundaries.
+
+
+
 ---
 
 ---
