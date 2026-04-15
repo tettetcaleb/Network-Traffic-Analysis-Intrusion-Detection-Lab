@@ -86,7 +86,7 @@ Urgent Pointer — only active when the URG flag is set, points to urgent data t
 
 Options — optional extra settings like maximum segment size or timestamps. Padded to keep the header aligned to 32-bit boundaries.
 
-
+Common ports: ![Screenshot](Network_screenshots/Screenshot-2026-04-15-055542.png)
 
 ---
 
