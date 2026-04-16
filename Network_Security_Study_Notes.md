@@ -164,7 +164,101 @@ Flow Records: Flow records in networking are essential for monitoring and analyz
 
 ## 4. tcpdump
 
-> *Notes coming — section in progress*
+tcpdump — What It Is & How It Works
+tcpdump is a command-line packet analyzer that runs on Linux/Unix systems. It intercepts and displays network packets passing through a network interface in real time, or saves them to a file for later analysis.
+
+
+How It Works
+
+tcpdump uses the libpcap library to capture raw packets directly from a network interface at the OS level, before the firewall or application layer processes them. You need root/sudo to run it because it operates in promiscuous mode — meaning it captures all traffic on the interface, not just traffic addressed to your machine.
+
+Core Uses
+
+1. Real-Time Traffic Monitoring
+
+Watch live traffic on an interface to see what's happening on your network right now.
+bashsudo tcpdump -i eth0
+2. Capturing to a File
+
+Save packets to a .pcap file to analyze later in Wireshark or other tools.
+bashsudo tcpdump -i eth0 -w capture.pcap
+3. Reading a Capture File
+
+bashsudo tcpdump -r capture.pcap
+4. Filtering Traffic
+
+This is where tcpdump becomes powerful. You can isolate exactly what you care about using Berkeley Packet Filter (BPF) syntax.
+
+Filter     Command
+
+By hosttcpdump host 192.168.1.10
+
+By source IPtcpdump src 10.0.0.5
+
+By destination IPtcpdump dst 10.0.0.5
+
+By porttcpdump port 443
+
+By protocoltcpdump icmp or tcp or udp
+
+Combine filterstcpdump src 10.0.0.5 and port 80
+
+Exclude traffictcpdump not port 22
+
+5. Verbose Output
+See more packet detail — TTL, checksum, flags, etc.
+bash
+sudo tcpdump -v    # verbose
+sudo tcpdump -vv   # more verbose
+sudo tcpdump -vvv  # maximum detail
+
+7. Show Packet Contents
+
+Display the actual payload data in hex and ASCII — useful for spotting cleartext credentials or malicious strings.
+
+bash
+sudo tcpdump -X -i eth0 port 80
+
+9. Limit Capture Count
+Stop after capturing N packets.
+
+bash
+sudo tcpdump -c 100 -i eth0
+
+Security & Forensics Uses
+
+Incident response — capture traffic during an active breach to see what data is leaving
+
+Detecting port scans — a flood of SYN packets to many ports is a clear nmap signature
+
+Finding cleartext credentials — HTTP, FTP, Telnet traffic can expose passwords
+
+C2 beaconing detection — regular outbound connections to unknown IPs at set intervals
+
+DNS analysis — spot unusual domain lookups or DNS tunneling
+
+Validating firewall rules — confirm traffic is actually being blocked
+
+
+Key Flags Cheat Sheet
+bash-i eth0       # specify interface
+-w file.pcap  # write to file
+-r file.pcap  # read from file
+-n            # don't resolve hostnames (faster)
+-nn           # don't resolve hostnames OR port names
+-v / -vv      # verbosity
+-X            # show hex + ASCII payload
+-c 50         # capture only 50 packets
+-A            # show payload in ASCII only
+
+tcpdump vs Wireshark
+              tcpdump                            Wireshark
+
+Interface     Command line                      GUI
+Best for      Remote servers, scripting,        Deep analysis, visualization
+Resource use  Very lightweight                  Heavier
+Output        Terminal / .pcap file            .pcap file with visual decode
+Typical use  Capture on server → transfer →     analyzeAnalyze locally
 
 ---
 
