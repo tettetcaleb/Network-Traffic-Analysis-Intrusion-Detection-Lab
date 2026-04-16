@@ -12,5 +12,5 @@ Basics of tcpdump
 
   Capturing network traffic using tcpdump
   
- -selected an interface and displayed its traffic using tcmdump ![Screenshot](Network_screenshots/Screenshot-2026-04-15-214518.png)
+ -selected an interface and displayed its traffic using tcpdump ![Screenshot](Network_screenshots/Screenshot-2026-04-15-214518.png)
  
