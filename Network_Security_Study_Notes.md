@@ -252,13 +252,13 @@ bash-i eth0       # specify interface
 -A            # show payload in ASCII only
 
 tcpdump vs Wireshark
-              tcpdump                            Wireshark
+#              tcpdump                            Wireshark
 
-Interface     Command line                      GUI
-Best for      Remote servers, scripting,        Deep analysis, visualization
-Resource use  Very lightweight                  Heavier
-Output        Terminal / .pcap file            .pcap file with visual decode
-Typical use  Capture on server → transfer →     analyzeAnalyze locally
+#Interface     Command line                      GUI
+#Best for      Remote servers, scripting,        Deep analysis, visualization
+#resource use  Very lightweight                  Heavier
+#Output        Terminal / .pcap file            .pcap file with visual decode
+#Typical use  Capture on server → transfer →     analyzeAnalyze locally
 
 ---
 
