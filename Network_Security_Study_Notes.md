@@ -105,7 +105,60 @@ Connectionless protocol — fires packets without confirming receipt.
 
 ## 3. Packet Capture and Flow Analysis
 
-> *Notes coming — section in progress*
+Packet: A packet is a small, structured unit of data transmitted over a network, carrying both the actual information and control details to ensure it reaches its destination correctly.
+
+Parts of a packer :
+  
+  -Header: is the control section at the start of a network packet that contains essential information for delivering and processing the data payload
+
+  -Payload:  refers to the actual data being transmitted from the sender to the receiver.
+
+  -Trailer: A packet trailer is supplemental data added to the end of a network packet, primarily used for error checking and ensuring data integrity.
+
+Packert Capture(PCAP):
+
+  -Intercepting Packets: involves capturing and analyzing data packets traveling across a network, which can be done using various tools and techniques for legitimate purposes like network monitoring and security analysis
+
+  Methods of intercepting packets include:
+    
+    -Port mirroting (SPAN Ports): a technique used in networking to copy packets from a specified source port to a destination port without affecting the original packet processing on the network device, such as a switch or router.
+
+   - Inline network Devices: These devices are integral to the functioning and security of a network, as they monitor, regulate, and control the flow of data packets within the network.
+
+   - Network taps: A network tap is a hardware or software device that provides complete, real-time access to network traffic for monitoring, security, and performance analysis without impacting network performance.
+  
+Packet captures are stored through:
+
+  PCAP Files:data file created by network packet capture tools like Wireshark.
+  
+  Advantages  of PCAP File:
+    - most detailed record
+    - includes packet [ayload
+
+   Disavantages
+  - resource intensive
+  - requires significant storage space
+  -Hard to scale
+
+Flow Records: Flow records in networking are essential for monitoring and analyzing network traffic
+
+  - Aggregated metadata
+  - 5-tuple
+      - source IP
+      - source Port
+      - Destination IP
+      - Destination Port
+      - Transport Protocol
+
+    Advantages
+      - Efficient bandwidth and storage requiremts
+      - high level pattern and anamoly detection
+      - easier to scale
+   
+    Disadvantages
+      - lacks payload deteal
+      - doesnt give you the whole picture
+
 
 ---
 
