@@ -258,7 +258,7 @@ tcpdump vs Wireshark
 |Best for      |Remote servers, scripting,        |Deep analysis, visualization                           |
 |resource use  |Very lightweight                  |Heavier                                                |
 |Output        |Terminal / .pcap file             |.pcap file with visual decode                          |
-|Typical use   |Capture on server → transfer →    |analyzeAnalyze locally                                 |
+|Typical use   |Capture on server,transfer,analyze    |Analyze locally                                 |
 
 ---
 
