@@ -14,5 +14,5 @@ Capturing network traffic using tcpdump
   
  -selected an interface and displayed its traffic using tcpdump ![Screenshot](Network_screenshots/Screenshot-2026-04-15-214518.png)
 
- -Filternigg and capturing network througha specific range of IP Adresses ![Screenshot](Network_screenshots/Screenshot-2026-04-17-064300.png)
+ -Filternig and capturing network through a specific range of IP Adresses ![Screenshot](Network_screenshots/Screenshot-2026-04-17-064300.png)
  
