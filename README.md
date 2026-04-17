@@ -28,5 +28,9 @@ Capturing network traffic using tcpdump
    
  - I then looked up this file and saw that it was associated with microsoft. But to be sure  looked up its IP address. what i noticed was that it was based in vietnam with no association to microsoft ![Screenshot](Network_screenshots/Screenshot-2026-04-17-082115.png)
 
- - I then performed another grep filtering to show any packet that contains .audiologg.exe file.
+ - I then performed another grep filtering to show any packet that contains .audiologg.exe file and then I opened the packets up  ![Screenshot](screenshots/Screenshot-2026-04-17-085052.png)
+
+ - After I copied the url and used cyberchef to decode it ![Screenshot](screenshots/Screenshot-2026-04-17-085614.png)
+
+ - After getting the url I theen proceeded to look it up on virustotal and it got flagged as malocious![screenshots/Screenshot-2026-04-17-085702.png)
  
