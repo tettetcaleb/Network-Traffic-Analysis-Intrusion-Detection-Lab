@@ -15,4 +15,18 @@ Capturing network traffic using tcpdump
  -selected an interface and displayed its traffic using tcpdump ![Screenshot](Network_screenshots/Screenshot-2026-04-15-214518.png)
 
  -Filternig and capturing network through a specific range of IP Adresses ![Screenshot](Network_screenshots/Screenshot-2026-04-17-064300.png)
+
+ Analyzing Network Traffic
+ 
+ - What Im going to do right now is analize a PCAP file that has been infected with LockBit![Screenshot](Network_screenshots/Screenshot-2026-04-17-075550.png)
+ - 
+ - In this PCAP file i noticed there was alot of traffic between Ip addressews on port 80. I then filtered to show only port 80 traffic. ![Screenshot](Network_screenshots/Screenshot-2026-04-17-080708.png)
+
+ - Since we are only dealing with HTTP I also searched for any get or post request using the grep command![Screenshot](Network_screenshots/Screenshot-2026-04-17-081228.png)
+
+ - After filtering i noticed that the endpoint downloaded an executable file called .audiologg.exe
+   
+ - I then looked up this file and saw that it was associated with microsoft. But to be sure  looked up its IP address. what i noticed was that it was based in vietnam with no association to microsoft![Screenshot](Network_screenshots/Screenshot-2026-04-17-082115.png)
+
+ - I then performed another grep filtering to show any packet that contains .audiologg.exe file.
  
