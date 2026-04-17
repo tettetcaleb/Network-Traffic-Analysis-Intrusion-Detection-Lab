@@ -32,5 +32,6 @@ Capturing network traffic using tcpdump
 
  - After I copied the url and used cyberchef to decode it ![Screenshot](screenshots/Screenshot-2026-04-17-085614.png)
 
- - After getting the url I theen proceeded to look it up on virustotal and it got flagged as malocious![screenshots/Screenshot-2026-04-17-085702.png)
+ - After getting the url I theen proceeded to look it up on virustotal and it got flagged as malocious!!![Screenshot](screenshots/Screenshot-2026-04-17-085702.png)
+
  
