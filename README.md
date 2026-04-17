@@ -26,7 +26,7 @@ Capturing network traffic using tcpdump
 
  - After filtering i noticed that the endpoint downloaded an executable file called .audiologg.exe
    
- - I then looked up this file and saw that it was associated with microsoft. But to be sure  looked up its IP address. what i noticed was that it was based in vietnam with no association to microsoft![Screenshot](Network_screenshots/Screenshot-2026-04-17-082115.png)
+ - I then looked up this file and saw that it was associated with microsoft. But to be sure  looked up its IP address. what i noticed was that it was based in vietnam with no association to microsoft ![Screenshot](Network_screenshots/Screenshot-2026-04-17-082115.png)
 
  - I then performed another grep filtering to show any packet that contains .audiologg.exe file.
  
