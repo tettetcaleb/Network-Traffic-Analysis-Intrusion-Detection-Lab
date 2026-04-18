@@ -57,4 +57,23 @@ I ran another grep to isolate all packets that contained the audiologg.exe filen
 Finally, I took the decoded URL and looked it up on VirusTotal. It came back flagged as malicious by multiple vendors that confirmed it. The URL is a known threat indicator tied to the LockBit ransomware campaign.
  ![Screenshot](Network_screenshots/Screenshot-2026-04-17-085702.png)
 
- 
+ Wireshark
+
+ Capture and display filters
+ - This is an example of me using wireshark to capture traffice from www.example.com woles excluding ports such as 80 and 25
+
+ - here is me using display filters to display only http traffic
+
+Statistics
+- Capture file properties: This allows me to view metadata and useful data about the packet file
+  
+- Reserved Address : This allows me to see where a DNS lookup was peformed and an IP address was maaped to a domain
+
+- Protocol Heirachy : This provides percentages for every protocol in a packet capture, organized by protocol layers.
+
+- Conversations : This shows me all two-way communication pairs.
+
+- Endpoints : This feature similar is to Conversations but is focused on individual hosts rather than pairs
+
+wireshark also allows me to follow a specific stream of traffic which is way more oonvinient than tcpdump
+   
