@@ -76,5 +76,5 @@ Statistics
 
 - Endpoints : This feature similar is to Conversations but is focused on individual hosts rather than pairs![Screenshot](Network_screenshots/Screenshot-2026-04-18-071325.png)
 
-wireshark also allows me to follow a specific stream of traffic which is way more oonvinient than tcpdump[Screenshot](Network_screenshots/Screenshot-2026-04-18-071851.png)
+wireshark also allows me to follow a specific stream of traffic which is way more oonvinient than tcpdump ![Screenshot](Network_screenshots/Screenshot-2026-04-18-071851.png)
    
