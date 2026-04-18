@@ -1,5 +1,10 @@
 # Network-Traffic-Analysis-Intrusion-Detection-Lab
-
+## TL;DR
+- Analyzed real-world malware PCAPs from a LockBit ransomware infection and a Qakbot campaign
+- Identified C2 communication, malicious file downloads, ARP scans, and SMB-based lateral movement
+- Extracted and verified malicious file hashes using VirusTotal and Malware Bazaar
+- Recovered compromised credentials from base64-encoded SMTP traffic using CyberChef
+- Tools used: Wireshark, tcpdump, CyberChef, VirusTotal, Malware Bazaar
 tcpdump
 
 Section 1: tcpdump Basics
