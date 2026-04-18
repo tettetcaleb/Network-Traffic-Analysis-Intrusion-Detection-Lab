@@ -264,7 +264,148 @@ tcpdump vs Wireshark
 
 ## 5. Wireshark
 
-> *Notes coming — section in progress*
+# Wireshark — Overview, Uses, and Why It's Preferred Over tcpdump
+
+---
+
+## What Is Wireshark?
+
+Wireshark is a free, open-source **network protocol analyzer** (also called a packet sniffer). It captures network traffic in real time and lets you inspect each packet in granular detail — from the raw bytes at the frame level all the way up to the application layer. Originally released in 1998 as "Ethereal," it was rebranded Wireshark in 2006 and has since become the industry-standard tool for network analysis worldwide.
+
+Wireshark works on all major platforms: **Windows, macOS, and Linux**.
+
+---
+
+## Core Capabilities
+
+- **Live packet capture** — intercepts traffic on any network interface (Ethernet, Wi-Fi, loopback, etc.)
+- **Offline analysis** — opens and inspects saved `.pcap` / `.pcapng` capture files
+- **Deep protocol dissection** — decodes hundreds of protocols automatically (TCP/IP, HTTP, DNS, TLS, DHCP, FTP, SMTP, and many more)
+- **Display filters** — lets you isolate specific traffic using a powerful, readable filter syntax (e.g., `http`, `ip.addr == 192.168.1.1`, `tcp.port == 443`)
+- **Capture filters** — restricts what gets captured in the first place (BPF syntax, same as tcpdump)
+- **Stream following** — reconstructs full TCP/UDP/SSL conversations for easy reading
+- **Statistics & graphs** — I/O graphs, protocol hierarchy trees, endpoint/conversation lists, round-trip time analysis
+- **Packet colorization** — color-codes traffic by protocol or condition for at-a-glance analysis
+- **Export options** — exports packets, decrypted sessions, objects (HTTP files, images), and statistics in multiple formats
+
+---
+
+## Common Use Cases
+
+### 1. Network Troubleshooting
+Diagnose latency, packet loss, retransmissions, connection resets, and misconfigured services. Wireshark's visual timeline and TCP stream analysis make it easy to pinpoint exactly where a communication breaks down.
+
+### 2. Security Analysis & Incident Response
+Identify suspicious traffic patterns, unauthorized connections, malware callbacks (C2 traffic), ARP spoofing, DNS poisoning, or data exfiltration. Security analysts use Wireshark to investigate alerts and confirm whether a threat is real.
+
+### 3. Protocol Development & Debugging
+Developers writing custom protocols or debugging application-layer behavior can see exactly what bytes are being sent and received, and verify their implementation against the spec.
+
+### 4. Learning & Education
+Wireshark is widely used in university networking courses and certifications (CompTIA Network+, CEH, OSCP) because it makes abstract protocol concepts concrete and visible.
+
+### 5. Performance Optimization
+Measure handshake times, identify chattiness (excessive round-trips), find bandwidth hogs, and analyze the impact of changes to network configuration.
+
+### 6. VoIP Analysis
+Decode and even play back RTP audio streams to troubleshoot VoIP call quality issues.
+
+---
+
+## What Is tcpdump?
+
+`tcpdump` is a **command-line packet capture tool** available on Unix/Linux systems. It captures packets and prints summaries to the terminal (or writes them to a `.pcap` file for later analysis). It is lightweight, scriptable, and available on almost every Unix-like system by default.
+
+Example:
+```bash
+tcpdump -i eth0 -w capture.pcap port 80
+```
+
+---
+
+## Wireshark vs. tcpdump — Why Wireshark Is Preferred
+
+| Feature | Wireshark | tcpdump |
+|---|---|---|
+| Interface | Graphical (GUI) | Command-line only |
+| Protocol decoding | Hundreds of protocols, full dissection | Basic summary output |
+| Ease of use | Beginner-friendly | Requires CLI expertise |
+| Display filters | Rich, intuitive filter language | BPF syntax only |
+| Stream reconstruction | Yes (Follow TCP/UDP/SSL Stream) | No |
+| Statistics & graphs | Built-in charts, timelines, trees | None (external tools needed) |
+| Real-time colorization | Yes | No |
+| Packet editing/replay | Via companion tools (editcap, Scapy) | Not built-in |
+| Platform | Windows, macOS, Linux | Linux/Unix only (Windows via WinDump) |
+| Remote capture | Yes (via `dumpcap` / `rpcapd` / SSH) | Yes |
+| Learning curve | Low to medium | Medium to high |
+
+### Key Reasons Wireshark Is Preferred
+
+**1. Graphical Interface Makes Analysis Accessible**
+tcpdump outputs raw text summaries that require experience to read quickly. Wireshark presents every packet in a structured three-pane layout — packet list, packet detail tree, and raw hex dump — making it usable for beginners and experts alike.
+
+**2. Superior Protocol Dissection**
+Wireshark fully decodes protocols and presents every field by name with its value. Instead of seeing `Flags [S]`, you see a labeled tree showing SYN=1, ACK=0, window size, and TCP options. tcpdump provides only a terse, abbreviated summary.
+
+**3. Powerful Display Filters**
+Wireshark's display filter language is human-readable and expressive. You can filter by any protocol field (`http.response.code == 404`, `dns.qry.name contains "evil"`, `tls.handshake.type == 1`). tcpdump uses Berkeley Packet Filter (BPF) syntax, which is powerful but significantly harder to write and limited to capture-time filtering.
+
+**4. Stream Following**
+With one click, Wireshark reconstructs the full back-and-forth of a TCP or UDP session as readable text. This is invaluable for seeing HTTP requests/responses, FTP sessions, or chat messages. tcpdump cannot do this natively.
+
+**5. Built-in Statistics and Visualization**
+Wireshark includes I/O graphs, protocol hierarchy statistics, endpoint and conversation tables, and RTT analysis — all without needing external tools. tcpdump must be paired with other tools (like tshark, Zeek, or Python scripts) to derive the same insights.
+
+**6. Cross-Platform**
+tcpdump is a Unix tool. Wireshark runs natively on Windows, macOS, and Linux, making it the default choice for analysts and developers working across environments.
+
+### When tcpdump Is Still the Right Tool
+
+Wireshark is not always the answer. tcpdump is preferred when:
+
+- You are working on a **headless server** with no GUI
+- You need to **capture remotely over SSH** and pipe output directly
+- You need a **lightweight, scriptable** solution for automated capture in pipelines
+- You want to **quickly grab packets** and save them for later Wireshark analysis
+
+A common real-world workflow combines both: use `tcpdump` (or Wireshark's `dumpcap`) to capture on a remote server, transfer the `.pcap` file, and open it in Wireshark for full analysis.
+
+---
+
+## Quick-Reference Filter Examples (Wireshark)
+
+```
+# Show only HTTP traffic
+http
+
+# Filter by IP address
+ip.addr == 192.168.1.100
+
+# Show DNS queries only
+dns.flags.response == 0
+
+# Filter by TCP port
+tcp.port == 443
+
+# Show only TCP retransmissions
+tcp.analysis.retransmission
+
+# Show traffic between two hosts
+ip.addr == 10.0.0.1 && ip.addr == 10.0.0.2
+
+# Show packets with HTTP 4xx errors
+http.response.code >= 400 && http.response.code < 500
+```
+
+---
+
+## Summary
+
+Wireshark is the gold standard for packet analysis because it combines the raw capture power of tcpdump with a full-featured graphical interface, deep protocol intelligence, and built-in analytical tools. For anyone doing serious network troubleshooting, security investigation, or protocol work, Wireshark provides capabilities that tcpdump simply cannot match out of the box. That said, they are complementary tools — and knowing both makes you a more effective network engineer or security analyst.
+
+---
+
+*Tool: Wireshark | Version: 4.x (current) | License: GNU GPLv2 | Site: [wireshark.org](https://www.wireshark.org)*
 
 ---
 
