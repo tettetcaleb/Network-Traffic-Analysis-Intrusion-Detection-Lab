@@ -77,4 +77,42 @@ Statistics
 - Endpoints : This feature similar is to Conversations but is focused on individual hosts rather than pairs![Screenshot](Network_screenshots/Screenshot-2026-04-18-071325.png)
 
 wireshark also allows me to follow a specific stream of traffic which is way more oonvinient than tcpdump ![Screenshot](Network_screenshots/Screenshot-2026-04-18-071851.png)
+
+Analyzing Network Traffic
+Now im about to analyze a PCap file provided by Malware-Traffic-analysis.net
+
+- First thing i do is start from a zoomed out overview and then highlight any interesting conversation by using capture file properties  ![Screenshot](Network_screenshots/Screenshot-2026-04-18-082528.png)
+
+- Next thing i did was use conversation to see the most communication between IP addresses ![Screenshot](Network_screenshots/Screenshot-2026-04-18-082726.png)
+
+- Next is to check the protocol Heirachy to see the most common protocols to see any low hanging fruit ![Screenshot](Network_screenshots/Screenshot-2026-04-18-082941.png)
+
+- What i did next was to set up additional collums to show the source and destination ports which are not enabled by default. ![Screenshot](Network_screenshots/Screenshot-2026-04-18-083240.png)
+
+- Next is to filter to show only http traffic. which i then analize and notice that the host value in the http header is an IP address and not a doamin name and also its making a request to a DAT file which is suspecious ![Screenshot](Network_screenshots/Screenshot-2026-04-18-083750.png)
+
+- I then opened the http stream and rebuilt the conversation and noticed that the user agent has a curl utility which i suspicoius. i also notice that is has an MZ file signature. This makes me come to the conclusion that the victim downloaded an executable file from a web server using the curl utility ![Screenshot](Network_screenshots/Screenshot-2026-04-18-084253.png)
+
+- After finding the name of the file, IP address and url associated with it, i then extracted the file itself to gather its hashes 
+
+- Next is to extraxt the hash of the file using sha256sum. ![Screenshot](Network_screenshots/Screenshot-2026-04-18-085018.png)
+
+- Now what i did was to chech the file reputaion using a tool called virus total and malware bazare which then flagged it as malicious and informed me of the malware family it belobgs to called Quakbot ![Screenshot](Network_screenshots/Screenshot-2026-04-18-085304.png)  ![Screenshot](Network_screenshots/Screenshot-2026-04-18-085604.png)
+
+- Next is to do research into quackbot and see if i can discover any post compromise IOC's or tactics i can identify in my PCAP file 
+
+- What i learnt about quackbot is tthat it has been observed peforming an ARP scan in order to discover other endpoints on the network. within IP and TCP traffic i saw a lot of ARP traffic. I am now going to check my PCAP for any indicators of an attacker performing an ARP scan ![Screenshot](Network_screenshots/Screenshot-2026-04-18-090647.png)
+
+- Then i noticed that under the info collum the IP addresses were descending which is a clear indication of an ARP scan. This tells me that the attacker was attempting to find any active machines within the network to probe 
+
+- Next i used the icmp filter to see any icmp echo request or replies when then told me that the hacker was able to make 2 replies and get 2 request ![Screenshot](Network_screenshots/Screenshot-2026-04-18-091234.png)
+
+- Next is to chech if the attacker peformed any port scans ![Screenshot](Network_screenshots/Screenshot-2026-04-18-091320.png)
+
+- when  i was looking at the protocol hierachy i also noticed smpt traffic. i then checked to see if i can uncover anything interesting. After using smpt filter i noticed an authentication login packet. which i then folowed thee tcp stream ![Screenshot](Network_screenshots/Screenshot-2026-04-18-091754.png)
+
+- In the TCP stream i copied the entire conversation of  base64 data for the authentication login and pasted it in cyberchef to decrpyt. what i discovered was the email address and the password the attacker tried to use But the authentication failed howerber i identified some compromised user credentiials. ![Screenshot](Network_screenshots/Screenshot-2026-04-18-092314.png)
+
+- next thing i did was export the SMB files. i then noticed some suspicious dlls files which i saved to a specified folder which i then run an SHA256 on them which showed the all had the same hash similar to the initial quackbot dll file ![Screenshot](Network_screenshots/Screenshot-2026-04-18-093059.png) ![Screenshot](Network_screenshots/Screenshot-2026-04-18-093907.png)
+
    
