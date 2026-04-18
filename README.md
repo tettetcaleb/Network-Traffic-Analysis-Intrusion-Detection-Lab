@@ -60,20 +60,21 @@ Finally, I took the decoded URL and looked it up on VirusTotal. It came back fla
  Wireshark
 
  Capture and display filters
- - This is an example of me using wireshark to capture traffice from www.example.com woles excluding ports such as 80 and 25
+ - This is an example of me using wireshark to capture traffice from www.example.com woles excluding ports such as 80 and 25 ![Screenshot](Network_screenshots/Screenshot-2026-04-18-065202.png)
 
- - here is me using display filters to display only http traffic
+ - here is me using display filters to display only http traffic ![Screenshot](Network_screenshots/Screenshot-2026-04-18-065619.png)
 
 Statistics
 - Capture file properties: This allows me to view metadata and useful data about the packet file
+   ![Screenshot](Network_screenshots/Screenshot-2026-04-18-070014.png)
   
-- Reserved Address : This allows me to see where a DNS lookup was peformed and an IP address was maaped to a domain
+- Reserved Address : This allows me to see where a DNS lookup was peformed and an IP address was maaped to a domain  ![Screenshot](Network_screenshots/Screenshot-2026-04-18-070508.png)
 
-- Protocol Heirachy : This provides percentages for every protocol in a packet capture, organized by protocol layers.
+- Protocol Heirachy : This provides percentages for every protocol in a packet capture, organized by protocol layers.  ![Screenshot](Network_screenshots/Screenshot-2026-04-18-070848.png)
 
-- Conversations : This shows me all two-way communication pairs.
+- Conversations : This shows me all two-way communication pairs.  ![Screenshot](Network_screenshots/Screenshot-2026-04-18-071142.png)
 
-- Endpoints : This feature similar is to Conversations but is focused on individual hosts rather than pairs
+- Endpoints : This feature similar is to Conversations but is focused on individual hosts rather than pairs![Screenshot](Network_screenshots/Screenshot-2026-04-18-071325.png)
 
-wireshark also allows me to follow a specific stream of traffic which is way more oonvinient than tcpdump
+wireshark also allows me to follow a specific stream of traffic which is way more oonvinient than tcpdump[Screenshot](Network_screenshots/Screenshot-2026-04-18-071851.png)
    
