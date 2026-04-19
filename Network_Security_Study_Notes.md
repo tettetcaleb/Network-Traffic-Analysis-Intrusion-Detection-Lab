@@ -455,7 +455,85 @@ Unknown Unknown — threats we don't know exist yet → hardest to defend agains
 
 ## 7. Snort
 
-> *Notes coming — section in progress*
+
+Snort is an open-source network intrusion detection and prevention system (IDS/IPS) originally 
+developed by Martin Roesch in 1998 and now maintained by Cisco. It analyzes network traffic in 
+real time and can detect a wide range of attacks and probes using rules you define or download.
+
+---
+
+## Snort Modes
+
+**Sniffer mode** — simply reads and displays packets on the screen, similar to tcpdump.
+```bash
+snort -v
+```
+
+**Packet Logger mode** — captures and logs packets to disk for later analysis.
+```bash
+snort -l /var/log/snort
+```
+
+**NIDS mode** — the main mode. Monitors live traffic and fires alerts based on rules.
+```bash
+snort -A console -c /etc/snort/snort.conf
+```
+
+**PCAP analysis mode** — runs rules against an existing PCAP file instead of live traffic.
+```bash
+snort -r capture.pcap -c /etc/snort/snort.conf -A console
+```
+
+---
+
+## Snort Versions
+
+**Snort 2 (2001–present)**
+The version most tutorials and courses still teach. Uses a single-threaded architecture meaning 
+it processes one packet at a time. Rule syntax is widely documented and most community rules are 
+written for it. Still used in many environments but considered legacy.
+
+**Snort 3 (2021–present)**
+The current version, a complete rewrite by Cisco. Key improvements include multi-threaded 
+processing, a cleaner rule syntax, better support for modern protocols, and easier configuration. 
+This is what modern SOC environments are moving toward.
+
+| | Snort 2 | Snort 3 |
+|---|---|---|
+| Architecture | Single-threaded | Multi-threaded |
+| Config file | snort.conf | snort.lua |
+| Performance | Slower | Significantly faster |
+| Rule syntax | Older format | Improved, more flexible |
+| Community support | Extensive | Growing |
+| Status | Legacy | Current |
+
+---
+
+## Snort Rule Structure
+
+Every Snort rule has two parts — the header and the options:
+alert tcp any any -> 192.168.1.0/24 80 (msg:"Suspicious HTTP traffic"; sid:1000001; rev:1;)
+
+Breaking it down:
+
+| Field | Value | Description |
+|---|---|---|
+| Action | `alert` | What to do — alert, drop, log, reject |
+| Protocol | `tcp` | tcp, udp, icmp, or ip |
+| Source | `any any` | Source IP and port |
+| Direction | `->` | Direction of traffic |
+| Destination | `192.168.1.0/24 80` | Destination IP and port |
+| msg | `"Suspicious HTTP traffic"` | Alert message displayed when rule fires |
+| sid | `1000001` | Unique rule ID — local rules start at 1000001 |
+| rev | `1` | Rule revision number |
+
+---
+
+## Why Snort Matters for This Lab
+
+Since the IOCs from the Qakbot and LockBit PCAPs were already identified manually using 
+Wireshark, Snort rules can now be written to detect those exact same threats automatically. 
+This demonstrates both the investigative and defensive sides of the SOC workflow.
 
 ---
 
