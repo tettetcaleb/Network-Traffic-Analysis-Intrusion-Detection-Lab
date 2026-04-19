@@ -425,6 +425,30 @@ Signature-based — compares traffic against a database of known attack patterns
 
 Anomaly-based — learns what normal traffic looks like and alerts on anything that deviates. Catches new threats but generates more false positives.
 
+Detection Methods
+
+Signature-based Detection
+
+Matches traffic against a database of known attack patterns. Great for catching known threats fast, but completely blind to anything new — if the signature doesn't exist, it won't detect it. This covers the Known Known quadrant — threats we know about and know how to detect.
+
+Behavior-based Detection
+
+Instead of looking for known patterns, it builds a baseline of what normal looks like and alerts on anything that deviates from it. Better at catching new and unknown threats but generates more false positives because not everything unusual is malicious. Covers the Known Unknown quadrant — we know threats exist but don't know exactly what they look like.
+
+Rule-based Detection
+
+You define the rules yourself based on your organization's specific policies — what's allowed, what's a violation. Highly flexible and customizable but requires constant maintenance because rules need to be updated as the environment changes. This is exactly what you'll be doing in Snort — writing your own rules.
+
+The quadrant explained simply:
+
+Known Known — we know the threat exists and we know what it looks like → Signature-based handles this
+
+Known Unknown — we know threats exist but can't predict the exact form → Behavior-based handles this
+
+Unknown Known — gaps in our knowledge about threats we should know about → training and intel sharing
+
+Unknown Unknown — threats we don't know exist yet → hardest to defend against, no tool fully covers this
+
 
 
 ---
