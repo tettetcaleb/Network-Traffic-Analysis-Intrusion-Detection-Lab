@@ -411,7 +411,21 @@ Wireshark is the gold standard for packet analysis because it combines the raw c
 
 ## 6. Intrusion Detection and Prevention Systems (IDS/IPS)
 
-> *Notes coming — section in progress*
+IDS — Intrusion Detection System
+
+Monitors network traffic and alerts you when something suspicious is detected. It's purely passive. It sees the threat and tells you about it, but does nothing to stop it. Think of it as a security camera.
+
+IPS — Intrusion Prevention System
+
+Does everything an IDS does but can also actively block or drop malicious traffic in real time. It sits inline with your traffic, meaning all traffic flows through it. Think of it as a security guard, not just a camera.
+
+Two detection methods:
+
+Signature-based — compares traffic against a database of known attack patterns. Fast and accurate against known threats, blind to new ones.
+
+Anomaly-based — learns what normal traffic looks like and alerts on anything that deviates. Catches new threats but generates more false positives.
+
+
 
 ---
 
