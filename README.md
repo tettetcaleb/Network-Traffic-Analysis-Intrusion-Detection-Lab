@@ -5,38 +5,7 @@
 - Extracted and verified malicious file hashes using VirusTotal and Malware Bazaar
 - Recovered compromised credentials from base64-encoded SMTP traffic using CyberChef
 - Tools used: Wireshark, tcpdump, CyberChef, VirusTotal, Malware Bazaar
-tcpdump
 
-tcpdump — Analyzing a LockBit Ransomware PCAP
-I worked with a PCAP captured during an active LockBit ransomware infection and used tcpdump to trace the attacker's activity. Before diving into the malware analysis I used tcpdump to capture live traffic, monitor interfaces, and observe TCP handshakes to get comfortable with the tool.
-
- 
- 1.1 Opening the PCAP File
-I loaded the PCAP file into tcpdump and immediately noticed a huge amount of traffic between IP addresses on port 80.
- ![Screenshot](Network_screenshots/Screenshot-2026-04-17-075550.png)
-
-   
- 1.2 Filtering for Port 80 Traffic
-Since most of the traffic was on port 80 (HTTP), I filtered the capture to only show that. HTTP traffic is unencrypted so it's a good place to look for malware activity since you can actually read what's being sent.
- ![Screenshot](Network_screenshots/Screenshot-2026-04-17-080708.png)
-
-1.3 Grepping for HTTP GET and POST Requests
-I used grep to filter the output further and only show HTTP GET and POST requests. This is where things got interesting — I could see exactly what the infected machine was requesting from the network.
-![Screenshot](Network_screenshots/Screenshot-2026-04-17-081228.png)
-
-1.4 Investigating the Source IP
-At first glance, audiologg.exe looked like it might be associated with Microsoft. But I had to confirm it. I looked up the IP address it was being served from and found it was geolocated in Vietnam with zero connection to Microsoft. Legitimate Microsoft files don't get served from random servers in Vietnam, so this was a clear red flag.
- ![Screenshot](Network_screenshots/Screenshot-2026-04-17-082115.png)
-
-
-1.5 Extracting and Decoding the Malicious URL
-I ran another grep to isolate all packets that contained the audiologg.exe filename, then opened them up to inspect the raw data. I copied out the encoded URL I found inside the packet and threw it into CyberChef to decode it, which gave me the full download URL the malware was using.
- ![Screenshot](Network_screenshots/Screenshot-2026-04-17-085052.png)
- ![Screenshot](Network_screenshots/Screenshot-2026-04-17-085614.png)
-
- 1.6 Confirming on VirusTotal
-Finally, I took the decoded URL and looked it up on VirusTotal. It came back flagged as malicious by multiple vendors that confirmed it. The URL is a known threat indicator tied to the LockBit ransomware campaign.
- ![Screenshot](Network_screenshots/Screenshot-2026-04-17-085702.png)
 
  # 🔍 tcpdump — LockBit Ransomware PCAP Analysis
 
